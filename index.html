@@ -685,7 +685,7 @@ a{color:inherit;}
 .details-card{margin-top:16px;}
 .details{gap:12px;}
 .host-line{margin-top:16px;}
-.pond-panel{padding-block:50.5px 94px;}
+.pond-panel{padding-block:44.8px 94px;}
 /* ---------- registry: larger + easier to find ---------- */
 .registry-card h2{
   font-size:2.3rem;
@@ -804,26 +804,30 @@ a{color:inherit;}
 .hero .names{font-size:1.5rem;}
 .details-card{
   margin-top:14px;
-  margin-inline:-56px;
-  padding:26px 30px;
+  margin-inline:-64px;
+  padding:22px 28px;
   border-radius:20px;
-  border:1.5px solid rgba(226,205,160,0.95);
-  background:rgba(255,248,240,0.30);
-  backdrop-filter:blur(2px);
-  -webkit-backdrop-filter:blur(2px);
-  box-shadow:0 16px 34px -20px rgba(58,44,61,0.4);
+  border:1px solid rgba(226,205,160,0.5);
+  background:rgba(255,248,240,0.08);
+  backdrop-filter:none;
+  -webkit-backdrop-filter:none;
+  box-shadow:none;
 }
-.details{gap:18px;}
+.details{gap:14px;}
 .detail-row{gap:18px;}
-.detail-icon{width:50px;height:50px;}
-.detail-icon svg{width:26px;height:26px;}
+.detail-icon{width:58px;height:58px;}
+.detail-icon svg{width:30px;height:30px;}
 .detail-label{
-  font-size:1.15rem;
+  font-size:1.3rem;
   letter-spacing:0.18em;
-  text-shadow:0 0 2px rgba(60,10,35,0.95), 0 0 3px rgba(60,10,35,0.9), 0 1px 2px rgba(60,10,35,0.9), 0 0 9px rgba(60,10,35,0.75);
+  margin-bottom:0;
+  text-shadow:0 1px 2px rgba(60,10,35,0.55), 0 0 8px rgba(60,10,35,0.28);
 }
-.detail-value{font-size:1.6rem;}
-.detail-value .small{font-size:1.3rem;margin-top:4px;}
+.detail-value{font-size:1.9rem;line-height:1.3;}
+.detail-value .small{font-size:1.5rem;margin-top:2px;}
+.detail-value,.detail-value .small{
+  text-shadow:0 0 6px rgba(255,255,255,0.6), 0 1px 3px rgba(255,255,255,0.45);
+}
 .host-line{margin-top:14px;}
 .field{display:flex;flex-direction:column;gap:6px;margin-bottom:16px;text-align:left;}
 .field label{

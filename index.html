@@ -226,7 +226,9 @@ a{color:inherit;}
   z-index:1;
   transition:opacity 0.4s ease;
   pointer-events:none;
-  text-shadow:0 2px 6px rgba(0,0,0,0.4);
+  font-weight:700;
+  color:#fff6e4;
+  text-shadow:0 1px 2px rgba(60,10,35,0.9), 0 0 6px rgba(60,10,35,0.75), 0 2px 12px rgba(60,10,35,0.6);
 }
 .cover.curtains-open .curtain-panel.left{transform:translateX(-101%);}
 .cover.curtains-open .curtain-panel.right{transform:translateX(101%);}
@@ -308,6 +310,50 @@ a{color:inherit;}
 .cover.curtains-open .seal{opacity:1;pointer-events:auto;}
 .seal img{width:100%;height:100%;object-fit:contain;}
 .seal:active{transform:translate(-50%,-50%) scale(0.94);}
+
+/* gentle pink-violet + antique-gold glow so guests know the seal is the thing to tap */
+.seal::before{
+  content:"";
+  position:absolute;
+  inset:-24%;
+  border-radius:50%;
+  z-index:-1;
+  pointer-events:none;
+  background:radial-gradient(circle,
+    rgba(214,178,94,0.55) 0%,
+    rgba(226,120,176,0.42) 36%,
+    rgba(150,92,206,0.30) 58%,
+    rgba(150,92,206,0) 72%);
+  animation:sealHalo 3.8s ease-in-out infinite;
+}
+.seal::after{
+  content:"";
+  position:absolute;
+  inset:-3%;
+  border-radius:50%;
+  border:0.45vw solid rgba(214,178,94,0.85);
+  z-index:-1;
+  pointer-events:none;
+  animation:sealRipple 3.8s ease-out infinite;
+}
+.seal{ animation:sealGlow 3.8s ease-in-out infinite; }
+@keyframes sealHalo{
+  0%,100%{opacity:0.55;transform:scale(0.93);}
+  50%{opacity:1;transform:scale(1.07);}
+}
+@keyframes sealRipple{
+  0%{opacity:0.75;transform:scale(1);}
+  70%,100%{opacity:0;transform:scale(1.5);}
+}
+@keyframes sealGlow{
+  0%,100%{filter:drop-shadow(0 6px 10px rgba(0,0,0,0.45)) drop-shadow(0 0 4px rgba(214,178,94,0.45)) drop-shadow(0 0 9px rgba(214,120,190,0.30));}
+  50%{filter:drop-shadow(0 6px 10px rgba(0,0,0,0.45)) drop-shadow(0 0 6px rgba(214,178,94,0.85)) drop-shadow(0 0 16px rgba(214,120,190,0.65));}
+}
+@media (prefers-reduced-motion:reduce){
+  .seal,.seal::before,.seal::after{animation:none;}
+  .seal::after{opacity:0;}
+  .seal::before{opacity:0.8;}
+}
 
 @keyframes twinkle{
   0%,100%{opacity:0.2;transform:scale(0.85);}

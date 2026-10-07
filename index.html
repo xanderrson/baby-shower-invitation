@@ -794,6 +794,8 @@ a{color:inherit;}
   .cover.nudge .seal-nudge::before{animation:none;}
   .cover.nudge .nudge-l1 span,.cover.nudge .nudge-l2,.cover.nudge .nudge-arrow{animation:none;opacity:1;transform:none;filter:none;}
 }
+/* briefly applied by JS when the page wakes up, so every looping animation restarts cleanly */
+.anim-restart *,.anim-restart *::before,.anim-restart *::after{animation:none !important;}
 .field{display:flex;flex-direction:column;gap:6px;margin-bottom:16px;text-align:left;}
 .field label{
   font-size:0.72rem;
@@ -1308,6 +1310,68 @@ footer small{font-size:0.75rem;letter-spacing:0.08em;color:rgba(58,44,61,0.8);}
   }
   tick();
   setInterval(tick, 1000);
+
+  // ---------- Wake-up handling ----------
+  // iOS freezes a page while Safari is in the background (or the phone is locked). On
+  // return, videos can stay paused, CSS animations can look stuck, and timers are stale.
+  // Whenever the page becomes visible again we refresh the countdown, restart the videos,
+  // restart every looping animation, and restart the stage-2 hint cycle.
+  function recoverVideos(){
+    dreamVideos.forEach(function(v){
+      v.muted = true;
+      if(v.ended || v.error || v.readyState < 2){ try{ v.load(); }catch(e){} }
+      var p = v.play();
+      if(p && p.catch){ p.catch(function(){}); }
+    });
+  }
+  function restartAnimations(){
+    var root = document.documentElement;
+    root.classList.add('anim-restart');
+    void root.offsetWidth;            // force a style flush so the animations really reset
+    root.classList.remove('anim-restart');
+  }
+  var lastWake = 0;
+  function wakeUp(){
+    if(document.hidden) return;
+    var now = Date.now();
+    if(now - lastWake < 800) return;  // several events fire together on return; run once
+    lastWake = now;
+    tick();
+    recoverVideos();
+    restartAnimations();
+    if(cover.classList.contains('curtains-open') && !cover.classList.contains('launched')){
+      clearTimeout(nudgeTimer);
+      cover.classList.remove('nudge','nudge-out');
+      scheduleNudge();
+    }
+  }
+  document.addEventListener('visibilitychange', wakeUp);
+  window.addEventListener('pageshow', wakeUp);   // also fires when Safari restores the tab from its page cache
+  window.addEventListener('focus', wakeUp);
+  document.addEventListener('touchstart', function(){ recoverVideosIfPaused(); }, {passive:true});
+
+  // Safety net: every few seconds, nudge any background video that has paused or stalled.
+  var lastVT = [], stallCount = [];
+  function recoverVideosIfPaused(){
+    dreamVideos.forEach(function(v){
+      if(v.paused && !v.ended){ v.muted = true; var p = v.play(); if(p && p.catch){ p.catch(function(){}); } }
+    });
+  }
+  setInterval(function(){
+    if(document.hidden || pages.hidden) return;
+    dreamVideos.forEach(function(v, i){
+      if(v.paused || v.ended){ recoverVideosIfPaused(); stallCount[i] = 0; lastVT[i] = v.currentTime; return; }
+      if(lastVT[i] !== undefined && v.currentTime === lastVT[i]){
+        stallCount[i] = (stallCount[i] || 0) + 1;
+        if(stallCount[i] >= 3){                  // frozen for ~9s: reload and resume
+          stallCount[i] = 0;
+          try{ v.load(); }catch(e){}
+          var p = v.play(); if(p && p.catch){ p.catch(function(){}); }
+        }
+      } else { stallCount[i] = 0; }
+      lastVT[i] = v.currentTime;
+    });
+  }, 3000);
 
   // RSVP radio toggle
   var row = document.getElementById('attendingRow');

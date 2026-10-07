@@ -622,6 +622,173 @@ a{color:inherit;}
   }
 }
 @media (prefers-reduced-motion:reduce){ .hero .names .baby-glow{animation:none;text-shadow:0 0 8px rgba(255,255,255,0.95), 0 0 16px rgba(214,178,94,0.5);} }
+/* ---------- stage 3 (top): bolder / bigger / easier to catch ---------- */
+.hero-panel .eyebrow{
+  font-size:1.1rem;
+  font-weight:700;
+  letter-spacing:0.24em;
+  color:#3b2a0c;
+  white-space:nowrap;
+}
+.hero .script{
+  font-size:clamp(3rem,13vw,4.4rem);
+  -webkit-text-stroke:0.9px #241a1f;
+}
+.hero .sub{
+  font-size:1.45rem;
+  font-weight:700;
+  text-wrap:balance;
+}
+.hero .names{
+  font-size:1.6rem;
+  font-weight:700;
+}
+.detail-label{
+  font-size:0.95rem;
+  font-weight:700;
+  color:#6b4d10;
+  letter-spacing:0.16em;
+}
+.detail-value{
+  font-size:1.3rem;
+  font-weight:600;
+  color:#241a1f;
+}
+.detail-value .small{
+  font-size:1.08rem;
+  font-weight:600;
+  color:#3a2c3d;
+}
+.detail-label,.detail-value,.detail-value .small{
+  text-shadow:0 0 6px rgba(255,255,255,0.95), 0 0 14px rgba(255,255,255,0.85), 0 1px 3px rgba(255,255,255,0.9);
+}
+.detail-icon{width:40px;height:40px;}
+.detail-icon svg{width:20px;height:20px;}
+.host-line{
+  font-size:1.2rem;
+  font-weight:600;
+  color:#3a2c3d;
+}
+.pond-panel h2{
+  font-weight:700;
+  color:#241a1f;
+  text-shadow:0 0 8px rgba(255,255,255,0.95), 0 0 18px rgba(255,255,255,0.85), 0 1px 3px rgba(255,255,255,0.95);
+}
+/* offsets so the bigger stage-3 text doesn't push the countdown / anything below */
+.hero-panel{padding-block:36px 24px;}
+.hero{gap:12px;}
+.details-card{margin-top:16px;}
+.details{gap:12px;}
+.host-line{margin-top:16px;}
+.pond-panel{padding-block:121.5px 36px;}
+/* ---------- registry: larger + easier to find ---------- */
+.registry-card h2{
+  font-size:2.3rem;
+  font-weight:700;
+  color:#241a1f;
+  text-align:center;
+  text-shadow:0 0 8px rgba(255,255,255,0.95), 0 0 18px rgba(255,255,255,0.85), 0 1px 3px rgba(255,255,255,0.95);
+}
+.registry-card .section-sub{
+  font-size:1.2rem;
+  font-weight:600;
+  color:#241a1f;
+  text-wrap:balance;
+  text-shadow:0 0 8px rgba(255,255,255,0.95), 0 0 18px rgba(255,255,255,0.85), 0 1px 3px rgba(255,255,255,0.95);
+}
+.registry-card .qr-wrap{width:180px;margin-bottom:14px;}
+.registry-card .btn{
+  font-size:1.3rem;
+  font-weight:700;
+  padding:17px 18px;
+  letter-spacing:0.04em;
+}
+.registry-panel{padding-bottom:16px;}
+.after-registry{padding-top:8px;}
+
+/* ---------- stage 2: "tap the seal to open" larger + brighter ---------- */
+.cover-text.seal-cta-block{top:19%;}
+.cover-text.seal-cta-block .cover-cta{
+  font-size:4.8vw;
+  font-weight:700;
+  letter-spacing:0.05em;
+  color:#ffffff;
+  text-shadow:0 1px 3px rgba(40,5,25,0.85), 0 0 8px rgba(40,5,25,0.6), 0 0 14px rgba(255,214,232,0.55);
+}
+/* ---------- stage 2 nudge: after ~16s without a seal tap, the scene warms to gold + a clear prompt appears ---------- */
+.seal-nudge{
+  position:absolute;
+  left:9%;right:9%;top:27%;bottom:11%;
+  z-index:1;
+  pointer-events:none;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;
+}
+.seal-nudge::before{
+  content:"";
+  position:absolute;inset:0;
+  background:linear-gradient(135deg,#f6e8b8 0%,#d6b25e 34%,#c29a42 62%,#efdb98 100%);
+  background-size:260% 260%;
+  opacity:0;
+  transition:opacity 5s ease;
+  -webkit-mask-image:radial-gradient(ellipse closest-side at center,#000 64%,rgba(0,0,0,0) 100%);
+  mask-image:radial-gradient(ellipse closest-side at center,#000 64%,rgba(0,0,0,0) 100%);
+}
+.cover.nudge .seal-nudge::before{
+  opacity:0.96;
+  animation:nudgeGold 7s ease-in-out infinite;
+}
+.cover.nudge .cover-text.title-block{opacity:0.06;transition:opacity 4s ease;}
+.cover.nudge.nudge-out .seal-nudge::before{opacity:0;transition:opacity 3s ease;}
+.cover.nudge.nudge-out .seal-nudge > *,
+.cover.nudge.nudge-out .nudge-l1 span{animation:none;opacity:0;transition:opacity 2s ease;}
+.cover.nudge.nudge-out .cover-text.title-block{opacity:1;transition:opacity 3s ease;}
+@keyframes nudgeGold{
+  0%,100%{background-position:0% 30%;}
+  50%{background-position:100% 70%;}
+}
+.seal-nudge > *{position:relative;opacity:0;}
+.nudge-arrow{
+  width:9vw;height:9vw;
+  color:#7a3b52;
+  margin-bottom:2vw;
+}
+.nudge-arrow svg{width:100%;height:100%;display:block;}
+.nudge-l1{
+  font-family:"Cormorant Garamond", serif;
+  font-weight:700;
+  font-size:7.4vw;
+  letter-spacing:0.08em;
+  color:#3a1420;
+  white-space:nowrap;
+  text-shadow:0 1px 2px rgba(255,244,205,0.8), 0 0 10px rgba(255,244,205,0.6);
+}
+.nudge-l1 span{display:inline-block;opacity:0;}
+.nudge-l2{
+  font-family:"Parisienne", cursive;
+  font-size:6.2vw;
+  color:#4a1a2a;
+  margin-top:1.5vw;
+  text-shadow:0 0 8px rgba(255,244,205,0.7);
+}
+.cover.nudge .nudge-l1{opacity:1;}
+.cover.nudge .nudge-l1 span{animation:nudgeWord 1.3s ease forwards;}
+.cover.nudge .nudge-l1 span:nth-child(1){animation-delay:2.6s;}
+.cover.nudge .nudge-l1 span:nth-child(2){animation-delay:3.4s;}
+.cover.nudge .nudge-l1 span:nth-child(3){animation-delay:4.2s;}
+.cover.nudge .nudge-l2{animation:nudgeFade 1.8s ease 5.4s forwards;}
+.cover.nudge .nudge-arrow{animation:nudgeFade 1.2s ease 6.4s forwards, nudgeBob 1.8s ease-in-out 7.6s infinite;}
+@keyframes nudgeWord{
+  from{opacity:0;transform:translateY(1.6vw);filter:blur(0.8vw);}
+  to{opacity:1;transform:none;filter:blur(0);}
+}
+@keyframes nudgeFade{from{opacity:0;}to{opacity:1;}}
+@keyframes nudgeBob{0%,100%{transform:translateY(0);}50%{transform:translateY(-1.8vw);}}
+@media (prefers-reduced-motion:reduce){
+  .seal-nudge::before{transition:opacity 1s ease;}
+  .cover.nudge .seal-nudge::before{animation:none;}
+  .cover.nudge .nudge-l1 span,.cover.nudge .nudge-l2,.cover.nudge .nudge-arrow{animation:none;opacity:1;transform:none;filter:none;}
+}
 .field{display:flex;flex-direction:column;gap:6px;margin-bottom:16px;text-align:left;}
 .field label{
   font-size:0.72rem;
@@ -786,6 +953,11 @@ footer small{font-size:0.75rem;letter-spacing:0.08em;color:rgba(58,44,61,0.8);}
     <div class="cover-text bottom-block">
       <div class="cover-date">NOVEMBER 14 · 2026</div>
     </div>
+    <div class="seal-nudge" aria-hidden="true">
+      <div class="nudge-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 14l7-7 7 7"/><path d="M5 20l7-7 7 7"/></svg></div>
+      <div class="nudge-l1"><span>TAP</span> <span>THE</span> <span>SEAL</span></div>
+      <div class="nudge-l2">to open the invitation</div>
+    </div>
   </div>
 </div>
 
@@ -938,7 +1110,7 @@ footer small{font-size:0.75rem;letter-spacing:0.08em;color:rgba(58,44,61,0.8);}
 
     <div class="reel-spacer-2" aria-hidden="true"></div>
 
-    <div class="panel cream">
+    <div class="panel cream registry-panel">
       <div class="wrap registry-card">
         <h2>Registry</h2>
         <p class="section-sub">Your presence is the real gift — but if you'd like to spoil the baby a little, here's where.</p>
@@ -951,7 +1123,7 @@ footer small{font-size:0.75rem;letter-spacing:0.08em;color:rgba(58,44,61,0.8);}
       </div>
     </div>
 
-    <div class="panel paper">
+    <div class="panel paper after-registry">
       <div class="wrap">
         <div class="two-up">
           <div class="card">
@@ -1015,10 +1187,33 @@ footer small{font-size:0.75rem;letter-spacing:0.08em;color:rgba(58,44,61,0.8);}
   document.addEventListener('click', tryPlayVideos, {once:true});
 
   // Stage 1: tap the closed curtains -> they part, revealing names + seal
+  var nudgeTimer = null;
+  var NUDGE_WAIT = 16000;   // quiet time before the gold prompt appears
+  var NUDGE_HOLD = 14000;   // how long the prompt stays up (reveal ~8s + a few seconds to read)
+  var NUDGE_FADE = 3200;    // fade back to the normal scene
+  function scheduleNudge(){
+    nudgeTimer = setTimeout(showNudge, NUDGE_WAIT);
+  }
+  function showNudge(){
+    if(cover.classList.contains('launched')) return;
+    cover.classList.add('nudge');
+    nudgeTimer = setTimeout(hideNudge, NUDGE_HOLD);
+  }
+  function hideNudge(){
+    if(cover.classList.contains('launched')) return;
+    cover.classList.add('nudge-out');
+    nudgeTimer = setTimeout(function(){
+      cover.classList.remove('nudge','nudge-out');
+      scheduleNudge();
+    }, NUDGE_FADE);
+  }
   var curtainTrigger = document.getElementById('curtainTrigger');
   function openCurtains(){
     if(cover.classList.contains('curtains-open')) return;
     cover.classList.add('curtains-open');
+    // If nobody taps the seal for ~16s, warm the scene to gold and spell out what to do,
+    // then fade back to the normal scene and repeat until the seal is tapped.
+    scheduleNudge();
   }
   curtainTrigger.addEventListener('click', openCurtains);
   curtainTrigger.addEventListener('keydown', function(e){
@@ -1030,6 +1225,7 @@ footer small{font-size:0.75rem;letter-spacing:0.08em;color:rgba(58,44,61,0.8);}
   function openEnv(){
     if(!cover.classList.contains('curtains-open')) return;
     if(cover.classList.contains('launched')) return;
+    clearTimeout(nudgeTimer);
     cover.classList.add('launched');
     setTimeout(function(){
       if(coverOuter){ coverOuter.style.display = 'none'; }

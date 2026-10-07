@@ -356,11 +356,15 @@ a{color:inherit;}
 
 /* hero / invite details */
 .hero{text-align:center;display:flex;flex-direction:column;gap:16px;}
-.hero .script{font-size:clamp(2.6rem,11vw,3.4rem);color:var(--rose-deep);}
-.hero .sub{font-size:1.05rem;color:var(--ink-soft);}
-.hero .names{font-size:1.15rem;letter-spacing:0.02em;}
+.hero .script{
+  font-size:clamp(3rem,13vw,3.9rem);
+  color:#241a1f;
+  -webkit-text-stroke:0.6px #241a1f;
+}
+.hero .sub{font-size:1.2rem;color:#241a1f;font-weight:600;}
+.hero .names{font-size:1.3rem;letter-spacing:0.02em;color:#241a1f;font-weight:600;}
 .hero .eyebrow,.hero .script,.hero .sub,.hero .names,.host-line{
-  text-shadow:0 1px 4px rgba(255,255,255,0.85), 0 2px 14px rgba(255,255,255,0.65);
+  text-shadow:0 0 8px rgba(255,255,255,0.95), 0 0 18px rgba(255,255,255,0.85), 0 1px 3px rgba(255,255,255,0.95), 0 2px 14px rgba(255,255,255,0.7);
 }
 
 .details-card{
@@ -523,6 +527,55 @@ a{color:inherit;}
   margin-bottom:22px;
 }
 .rsvp .section-sub{margin-bottom:0;}
+/* legibility boost: countdown label + RSVP subtext (line boxes pinned so nothing below moves) */
+.pond-panel .eyebrow{
+  font-size:1.2rem;
+  font-weight:700;
+  letter-spacing:0.26em;
+  color:#3b2a0c;
+  line-height:16px;
+  height:16px;
+  white-space:nowrap;
+  text-shadow:0 0 8px rgba(255,255,255,0.95), 0 0 18px rgba(255,255,255,0.85), 0 1px 3px rgba(255,255,255,0.95), 0 2px 14px rgba(255,255,255,0.7);
+}
+.rsvp .section-sub{
+  font-size:1.2rem;
+  font-weight:600;
+  color:#241a1f;
+  line-height:1.5675rem;
+  text-shadow:0 0 8px rgba(255,255,255,0.95), 0 0 18px rgba(255,255,255,0.85), 0 1px 3px rgba(255,255,255,0.95), 0 2px 14px rgba(255,255,255,0.7);
+}
+/* oscillating pink glow on the RSVP deadline date (inline only, no layout change) */
+.deadline-date{
+  display:inline;
+  font-weight:700;
+  color:#8e1f4d;
+  animation:deadlineGlow 2.6s ease-in-out infinite;
+}
+@keyframes deadlineGlow{
+  0%,100%{
+    color:#8e1f4d;
+    text-shadow:0 0 5px rgba(255,255,255,0.95), 0 0 10px rgba(244,143,177,0.55), 0 0 18px rgba(244,143,177,0.35);
+  }
+  50%{
+    color:#b3245f;
+    text-shadow:0 0 5px rgba(255,255,255,0.95), 0 0 12px rgba(236,98,150,0.95), 0 0 24px rgba(236,98,150,0.8), 0 0 38px rgba(236,98,150,0.5);
+  }
+}
+@media (prefers-reduced-motion:reduce){ .deadline-date{animation:none;text-shadow:0 0 8px rgba(236,98,150,0.7), 0 0 14px rgba(255,255,255,0.9);} }
+/* soft antique-gold pulse on "Baby Anderson" (text colour/size untouched, so no layout change) */
+.hero .names .baby-glow{
+  animation:babyGlow 5.5s ease-in-out infinite;
+}
+@keyframes babyGlow{
+  0%,100%{
+    text-shadow:0 0 8px rgba(255,255,255,0.95), 0 0 16px rgba(214,178,94,0.30), 0 0 26px rgba(214,178,94,0.18);
+  }
+  50%{
+    text-shadow:0 0 8px rgba(255,255,255,0.95), 0 0 14px rgba(214,178,94,0.75), 0 0 26px rgba(214,178,94,0.55), 0 0 40px rgba(214,178,94,0.35);
+  }
+}
+@media (prefers-reduced-motion:reduce){ .hero .names .baby-glow{animation:none;text-shadow:0 0 8px rgba(255,255,255,0.95), 0 0 16px rgba(214,178,94,0.5);} }
 .field{display:flex;flex-direction:column;gap:6px;margin-bottom:16px;text-align:left;}
 .field label{
   font-size:0.72rem;
@@ -664,7 +717,7 @@ footer small{font-size:0.75rem;letter-spacing:0.08em;color:rgba(58,44,61,0.8);}
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Parisienne&family=Pinyon+Script&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Parisienne&family=Pinyon+Script&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
 
 <div class="cover-outer">
   <div class="cover">
@@ -715,7 +768,7 @@ footer small{font-size:0.75rem;letter-spacing:0.08em;color:rgba(58,44,61,0.8);}
         <div class="eyebrow">welcome, little one</div>
         <div class="script">A Blessing<br>on the Way</div>
         <p class="sub">Please join us as we celebrate the newest addition to our family.</p>
-        <p class="names">In honor of <strong>Baby Anderson</strong></p>
+        <p class="names">In honor of <strong class="baby-glow">Baby Anderson</strong></p>
 
         <div class="details-card">
           <div class="details">
@@ -797,7 +850,7 @@ footer small{font-size:0.75rem;letter-spacing:0.08em;color:rgba(58,44,61,0.8);}
     <div class="panel paper">
       <div class="wrap rsvp">
         <h2>Kindly RSVP</h2>
-        <p class="section-sub">We'd love to know you're coming — by October&nbsp;16.</p>
+        <p class="section-sub">We'd love to know you're coming — by <span class="deadline-date">October&nbsp;16</span>.</p>
         <div class="card">
           <form id="rsvpForm">
             <input type="hidden" name="_subject" value="New RSVP - Baby Anderson's Baby Shower">
@@ -898,6 +951,22 @@ footer small{font-size:0.75rem;letter-spacing:0.08em;color:rgba(58,44,61,0.8);}
   var pages = document.getElementById('pages');
   var cover = document.querySelector('.cover');
   var coverOuter = document.querySelector('.cover-outer');
+
+  // Ensure background videos actually autoplay. iOS Low Power Mode (and some
+  // data-saver settings) can silently block autoplay even with the muted
+  // attribute set, which shows a native play-button overlay instead of the
+  // video. Retry play() on load and on the first tap anywhere on the page.
+  var dreamVideos = document.querySelectorAll('#dreamBg video');
+  function tryPlayVideos(){
+    dreamVideos.forEach(function(v){
+      v.muted = true;
+      var p = v.play();
+      if(p && p.catch){ p.catch(function(){}); }
+    });
+  }
+  tryPlayVideos();
+  document.addEventListener('touchstart', tryPlayVideos, {once:true, passive:true});
+  document.addEventListener('click', tryPlayVideos, {once:true});
 
   // Stage 1: tap the closed curtains -> they part, revealing names + seal
   var curtainTrigger = document.getElementById('curtainTrigger');

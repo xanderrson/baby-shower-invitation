@@ -685,7 +685,7 @@ a{color:inherit;}
 .details-card{margin-top:16px;}
 .details{gap:12px;}
 .host-line{margin-top:16px;}
-.pond-panel{padding-block:63.5px 94px;}
+.pond-panel{padding-block:50.5px 94px;}
 /* ---------- registry: larger + easier to find ---------- */
 .registry-card h2{
   font-size:2.3rem;
@@ -796,6 +796,35 @@ a{color:inherit;}
 }
 /* briefly applied by JS when the page wakes up, so every looping animation restarts cleanly */
 .anim-restart *,.anim-restart *::before,.anim-restart *::after{animation:none !important;}
+/* ---------- stage 3: bigger, bolder Date / Time / Venue box + rebalanced spacing around it ---------- */
+.hero-panel{padding-block:24px 16px;}
+.hero{gap:14px;}
+.hero .script{font-size:clamp(3rem,13vw,3.8rem);}
+.hero .sub{font-size:1.35rem;}
+.hero .names{font-size:1.5rem;}
+.details-card{
+  margin-top:14px;
+  margin-inline:-56px;
+  padding:26px 30px;
+  border-radius:20px;
+  border:1.5px solid rgba(226,205,160,0.95);
+  background:rgba(255,248,240,0.30);
+  backdrop-filter:blur(2px);
+  -webkit-backdrop-filter:blur(2px);
+  box-shadow:0 16px 34px -20px rgba(58,44,61,0.4);
+}
+.details{gap:18px;}
+.detail-row{gap:18px;}
+.detail-icon{width:50px;height:50px;}
+.detail-icon svg{width:26px;height:26px;}
+.detail-label{
+  font-size:1.15rem;
+  letter-spacing:0.18em;
+  text-shadow:0 0 2px rgba(60,10,35,0.95), 0 0 3px rgba(60,10,35,0.9), 0 1px 2px rgba(60,10,35,0.9), 0 0 9px rgba(60,10,35,0.75);
+}
+.detail-value{font-size:1.6rem;}
+.detail-value .small{font-size:1.3rem;margin-top:4px;}
+.host-line{margin-top:14px;}
 .field{display:flex;flex-direction:column;gap:6px;margin-bottom:16px;text-align:left;}
 .field label{
   font-size:0.72rem;
